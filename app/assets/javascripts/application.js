@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require wyncode_assets/wyncode_javascripts
 //= require_tree .
