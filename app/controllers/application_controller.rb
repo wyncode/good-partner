@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action CASClient::Frameworks::Rails::Filter
   protect_from_forgery with: :exception
-  before_action :current_user, :redirect_to_login
+  before_action :current_user, :redirect_to_login, :redirect_to_dashboard
   helper_method :current_user
 
   def current_user

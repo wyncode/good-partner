@@ -2,10 +2,8 @@ class SessionController < ApplicationController
   skip_before_action :redirect_to_login
 
   def login
-    if @current_user && @current_user.admin
+    if current_user
       redirect_to root_path
-    elsif @current_user && !@current_user.admin
-      redirect_to 'http://dashboard.wyncode.co/'
     end
   end
 
