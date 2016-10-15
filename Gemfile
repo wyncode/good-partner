@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
 # CAS Integration
 gem 'rubycas-client', :git => "https://github.com/rubycas/rubycas-client"
