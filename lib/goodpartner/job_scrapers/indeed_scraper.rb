@@ -1,12 +1,5 @@
-# require 'httparty'
-require 'capybara/dsl'
-require 'capybara-webkit'
-require 'hp_scraper'
-
-class IndeedScraper
-  # include HTTParty
-  include Capybara::DSL
-
+class IndeedScraper < GoodPartner::Scraper
+  # include Capybara::DSL
   attr_reader :url
 
   def self.call
@@ -56,7 +49,6 @@ class IndeedScraper
       Company.find_or_create_by(name: company_name) do |c|
         c.name = company_name
         j.company = c
-        HPScraper.call(c)
       end
 
       j.description = description
@@ -67,21 +59,20 @@ class IndeedScraper
 
   def skills
     %w(
-      ruby
-      javascript
-      rails
-      sql
-      git
-      html
-      css
-      jquery
-      agile
-      full-stack
-      junior
-      jr.
-      developer
+    ruby
+    javascript
+    rails
+    sql
+    git
+    html
+    css
+    jquery
+    agile
+    full-stack
+    junior
+    jr.
+    developer
     )
   end
 
 end
-
