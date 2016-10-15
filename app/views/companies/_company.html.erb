@@ -1,0 +1,7 @@
+<%= @company.name %><br>
+
+<ul>
+  <% @company.body.each do |key, value| %>
+    <li><strong><%= key %></strong>: <%= value %></li>
+  <% end %>
+</ul>

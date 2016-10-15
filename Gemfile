@@ -6,6 +6,13 @@ gem 'rubycas-client', :git => "https://github.com/rubycas/rubycas-client"
 # Wyncode Styling
 gem 'wyncode_assets', git: 'https://github.com/wyncode/wyncode_assets.git', branch: 'rails5'
 
+gem 'httparty'
+gem 'capybara'
+gem 'capybara-webkit'
+gem 'poltergeist'
+gem 'launchy'
+gem 'clearbit'
+
 gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -20,12 +27,12 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'better_errors'
-  gem 'capybara-webkit'
   gem 'dotenv-rails'
   gem 'binding_of_caller'
 end
 
 group :development do
+  gem 'pry'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
