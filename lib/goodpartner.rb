@@ -11,6 +11,10 @@ module GoodPartner
     def discovery_search(args)
       Clearbit::Discovery.search(args)
     end
+
+    def person_search(args)
+      Clearbit::Prospector.search(args)
+    end
   end
 
   class Scraper

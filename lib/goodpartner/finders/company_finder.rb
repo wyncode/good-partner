@@ -12,12 +12,6 @@ module GoodPartner
     end
 
     def find(opts = {})
-      # opts.each do |k, v|
-      #   singleton_class.class_eval { attr_accessor k }
-      #   instance_variable_set("@#{k}".to_sym, v)
-      # end unless opts.empty?
-      p opts
-
       GoodPartner.discovery_search(opts).results.each do |result|
         save(result)
       end
