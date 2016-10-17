@@ -1,5 +1,15 @@
+<h1>Listing Companies with Info</h1>
+
+<ul>
+  <% @clearbit_companies.each do |company| %>
+    <li><%= link_to company.name, company %></li>
+  <% end %>
+</ul>
+
+<h1>Listing Companies without Info</h1>
+
 <ul>
   <% @companies.each do |company| %>
-    <li><%= link_to company.name, company %></li>
+    <li><%= company.name %></li>
   <% end %>
 </ul>

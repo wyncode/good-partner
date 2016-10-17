@@ -1,14 +1,8 @@
 module GoodPartner
   class CompanyFinder
 
-    attr_reader :company
-
-    def self.call(company, opts = {})
-      new(company).find(opts)
-    end
-
-    def initialize(company)
-      @company = company
+    def self.call(, opts = {})
+      new.find(opts)
     end
 
     def find(opts = {})
@@ -19,9 +13,11 @@ module GoodPartner
 
     def save(result)
       result = {} if result.nil?
+
       c = Company.find_or_create_by(name: result['name']) do |co|
         co.body = result
       end
+
       c.body = result
       c.save
     end

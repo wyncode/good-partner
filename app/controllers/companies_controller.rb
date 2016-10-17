@@ -5,7 +5,8 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.all
+    @clearbit_companies = Company.where.not(body: nil)
+    @companies = Company.where(body: nil)
   end
 
   private
