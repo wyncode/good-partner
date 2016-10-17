@@ -12,3 +12,9 @@
   <%= render job %>
 <% end %>
 
+<h3>People</h3>
+
+<% @company.people.each do |person| %>
+  <%= render person %>
+<% end %>
+

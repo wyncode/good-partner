@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/dashboard' => 'jobs#dashboard'
+  get '/dashboard' => 'admin#dashboard'
   get '/jobs' => 'jobs#index'
 
   resources :companies, only: [:show, :index]

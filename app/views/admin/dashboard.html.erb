@@ -1,0 +1,10 @@
+<h1>Recent Jobs</h1>
+<h2>Showing Jobs within <%= params[:days] || 1 %> day(s)</h2>
+<h3>Find Jobs within: </h3>
+<%= form_tag 'dashboard', method: :get do %>
+  <%= select_tag :days, options_for_select((1..10).to_a, params[:days]) %> day(s)<br>
+  <%= submit_tag 'Search' %>
+<% end %>
+<% @recent_jobs.each do |job| %>
+  <%= render job %>
+<% end %>
