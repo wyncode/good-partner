@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: :show
 
   def show
+    @company.body = {} if @company.body.nil?
   end
 
   def index
