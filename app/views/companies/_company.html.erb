@@ -1,7 +1,14 @@
-<%= @company.name %><br>
+<h1><%= @company.name %></h1><br>
 
 <ul>
-  <% @company.body.each do |key, value| %>
-    <li><strong><%= key %></strong>: <%= value %></li>
+  <% (@company.body.keys-['timeZone', 'utcOffset', 'geo']).each do |key, value| %>
+    <li><strong><%= key %></strong>: <%= @company.body[key] %></li>
   <% end %>
 </ul>
+
+<h3>Job Listings</h3>
+
+<% @company.jobs.each do |job| %>
+  <%= render job %>
+<% end %>
+
