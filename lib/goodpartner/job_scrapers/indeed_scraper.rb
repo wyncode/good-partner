@@ -12,7 +12,11 @@ class IndeedScraper < GoodPartner::Scraper
 
   def scrape
     find_and_fill_form limit: 20
-    visit_each_job
+
+    while page.has_css?('.np')
+      find('.np', match: :first).click
+      visit_each_job
+    end
   end
 
   def find_and_fill_form(opts = {})
@@ -34,6 +38,7 @@ class IndeedScraper < GoodPartner::Scraper
       find_all('.row.result').each do |result|
         within(result) do
           find('.jobtitle').click
+          p 'saving'
           save_job_info
         end
       end

@@ -1,7 +1,7 @@
 module GoodPartner
   class CompanyFinder
 
-    def self.call(, opts = {})
+    def self.call(opts = {})
       new.find(opts)
     end
 
