@@ -10,7 +10,7 @@ gem 'wyncode_assets', git: 'https://github.com/wyncode/wyncode_assets.git', bran
 gem 'httparty'
 gem 'capybara'
 gem 'capybara-webkit'
-gem 'poltergeist'
+gem 'selenium-webdriver'
 gem 'launchy'
 gem 'clearbit'
 

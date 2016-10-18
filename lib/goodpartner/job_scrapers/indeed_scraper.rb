@@ -1,5 +1,4 @@
 class IndeedScraper < GoodPartner::Scraper
-  # include Capybara::DSL
   attr_reader :url
 
   def self.call
@@ -13,10 +12,9 @@ class IndeedScraper < GoodPartner::Scraper
   def scrape
     find_and_fill_form limit: 20
 
-    while page.has_css?('.np')
-      find('.np', match: :first).click
-      visit_each_job
-    end
+    close_popup
+
+    visit_each_job
   end
 
   def find_and_fill_form(opts = {})
@@ -35,19 +33,25 @@ class IndeedScraper < GoodPartner::Scraper
 
   def visit_each_job
     within('#resultsCol') do
+      save_and_open_page
       find_all('.row.result').each do |result|
         within(result) do
           find('.jobtitle').click
-          p 'saving'
           save_job_info
         end
       end
     end
+
+    if page.has_css?('.np')
+      find_all('.np').last.click
+      visit_each_job
+    end
+
   end
 
   def save_job_info
     title = find('.jobtitle').text
-    company_name = find('.company').text
+    company_name = find('.company').text if page.has_css?('.company')
     description = find('.summary').text
 
     Job.find_or_create_by(description: description) do |j|
@@ -59,7 +63,10 @@ class IndeedScraper < GoodPartner::Scraper
       j.description = description
       j.title = title
     end
+  end
 
+  def close_popup
+    find('#prime-popover-close-button', match: :first).click if page.has_css?('#prime-popover-close-button')
   end
 
   def skills
