@@ -1,23 +1,55 @@
-<h1>Stats</h1>
-<h3>Jobs Found: <%= @total_jobs %></h3>
-<h3>Companies Found: <%= @total_companies %></h3><br>
+<div class="stats">
+  <h2 class="title">Stats</h2>
+  <ul class="stats-list">
+    <li><h3><%= link_to "Jobs Found: #{@total_jobs}", jobs_path %></h3>
+    <li><h3><%= link_to "Companies Found: #{@total_companies}", companies_path %></h3>
+    <li><h3><%= link_to "People Found: #{@total_people}", people_path %></h3>
+  </ul>
+</div>
 
-<h1>Recent Jobs</h1>
-<h2>Showing Jobs within <%= params[:days] || 1 %> day(s)</h2>
-<h3>Find Jobs within: </h3>
 <%= form_tag 'dashboard', method: :get do %>
-  <%= select_tag :days, options_for_select((1..10).to_a, params[:days]) %> day(s)<br>
+  <h3><%= label_tag 'Show Jobs from Companies with:' %></h3>
+  <%= label_tag 'information' %>
+  <%= check_box_tag :with_info %>
+  <%= label_tag 'without information' %>
+  <%= check_box_tag :without_info %>
+  <%= label_tag 'all' %>
+  <%= check_box_tag :all %>
   <%= submit_tag 'Search' %>
 <% end %>
-<h1>Listing Jobs with Company Info</h1>
 
-<% @jobs_with_company_info.each do |job| %>
-  <%= render job %>
+<h4><%= Job.per_page %> per page</h4>
+<% if params[:all] %>
+
+  <h2>Listing All Jobs</h2>
+  <%= will_paginate @recent_jobs %>
+
+  <% @recent_jobs.each do |job| %>
+    <%= render job %>
+  <% end %>
+
+  <%= will_paginate @recent_jobs %>
+
+<% elsif params[:with_info] %>
+
+  <h2>Listing Jobs with Company Info</h2>
+  <%= will_paginate @recent_jobs %>
+
+  <% @recent_jobs.each do |job| %>
+    <%= render job unless job.company.body.nil? %>
+  <% end %>
+
+  <%= will_paginate @recent_jobs %>
+
+<% elsif params[:without_info] %>
+
+  <h2>Listing Jobs without Company Info</h2>
+  <%= will_paginate @recent_jobs %>
+
+  <% @recent_jobs.each do |job| %>
+    <%= render job if job.company.body.nil? %>
+  <% end %>
+
+  <%= will_paginate @recent_jobs %>
+
 <% end %>
-
-<h1>Listing Jobs without Company Info</h1>
-
-<% @jobs_without_company_info.each do |job| %>
-  <%= render job %>
-<% end %>
-

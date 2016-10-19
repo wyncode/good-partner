@@ -1,6 +1,6 @@
 <h1>Listing People</h1>
 <ul>
   <% @people.each do |person| %>
-    <li><%= link_to person.body['name']['fullName'], person %>
+    <li><%= link_to person.body['name']['fullName'], person %> -- <%= person.body['title'] %> -- <%= person.company.name %>
   <% end %>
 </ul>
