@@ -1,15 +1,58 @@
-<h1>Listing Companies with Info</h1>
+<%= form_tag '/companies', method: :get do %>
+  <h3><%= label_tag 'Show Companies with:' %></h3>
+  <%= label_tag 'information' %>
+  <%= check_box_tag :with_info %>
+  <%= label_tag 'without information' %>
+  <%= check_box_tag :without_info %>
+  <%= label_tag 'all' %>
+  <%= check_box_tag :all %>
+  <%= submit_tag 'Search' %>
+<% end %>
 
-<ul>
-  <% @clearbit_companies.each do |company| %>
-    <li><%= link_to company.name, company %></li>
+<h4><%= Company.per_page %> per page</h4>
+<div class="module">
+  <% if params[:all] %>
+
+    <h2>Listing All Companies</h2>
+    <%= will_paginate @companies %>
+
+    <ul>
+      <% @companies.each do |company| %>
+        <li><%= link_to company.name, company %>
+      <% end %>
+    </ul>
+
+    <%= will_paginate @companies %>
+
+  <% elsif params[:with_info] %>
+
+    <h2>Listing Companis with Info</h2>
+    <%= will_paginate @companies %>
+
+    <ul>
+      <% @companies.each do |company| %>
+        <% unless company.body.nil? %>
+          <li><%= link_to company.name, company %>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <%= will_paginate @companies %>
+
+  <% elsif params[:without_info] %>
+
+    <h2>Listing Companies without Info</h2>
+    <%= will_paginate @companies %>
+
+    <ul>
+      <% @companies.each do |company| %>
+        <% if company.body.nil? %>
+          <li><%= link_to company.name, company %>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <%= will_paginate @companies %>
+
   <% end %>
-</ul>
-
-<h1>Listing Companies without Info</h1>
-
-<ul>
-  <% @companies.each do |company| %>
-    <li><%= company.name %></li>
-  <% end %>
-</ul>
+</div>

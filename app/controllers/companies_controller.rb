@@ -6,8 +6,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @clearbit_companies = Company.where.not(body: nil)
-    @companies = Company.where(body: nil)
+    @companies = Company.page(params[:page]).order('created_at DESC')
   end
 
   private

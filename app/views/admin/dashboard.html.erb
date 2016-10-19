@@ -19,37 +19,39 @@
 <% end %>
 
 <h4><%= Job.per_page %> per page</h4>
-<% if params[:all] %>
+<div class="module">
+  <% if params[:all] %>
 
-  <h2>Listing All Jobs</h2>
-  <%= will_paginate @recent_jobs %>
+    <h2>Listing All Jobs</h2>
+    <%= will_paginate @recent_jobs %>
 
-  <% @recent_jobs.each do |job| %>
-    <%= render job %>
+    <% @recent_jobs.each do |job| %>
+      <%= render job %>
+    <% end %>
+
+    <%= will_paginate @recent_jobs %>
+
+  <% elsif params[:with_info] %>
+
+    <h2>Listing Jobs with Company Info</h2>
+    <%= will_paginate @recent_jobs %>
+
+    <% @recent_jobs.each do |job| %>
+      <%= render job unless job.no_company_info %>
+    <% end %>
+
+    <%= will_paginate @recent_jobs %>
+
+  <% elsif params[:without_info] %>
+
+    <h2>Listing Jobs without Company Info</h2>
+    <%= will_paginate @recent_jobs %>
+
+    <% @recent_jobs.each do |job| %>
+      <%= render job if job.no_company_info %>
+    <% end %>
+
+    <%= will_paginate @recent_jobs %>
+
   <% end %>
-
-  <%= will_paginate @recent_jobs %>
-
-<% elsif params[:with_info] %>
-
-  <h2>Listing Jobs with Company Info</h2>
-  <%= will_paginate @recent_jobs %>
-
-  <% @recent_jobs.each do |job| %>
-    <%= render job unless job.company.body.nil? %>
-  <% end %>
-
-  <%= will_paginate @recent_jobs %>
-
-<% elsif params[:without_info] %>
-
-  <h2>Listing Jobs without Company Info</h2>
-  <%= will_paginate @recent_jobs %>
-
-  <% @recent_jobs.each do |job| %>
-    <%= render job if job.company.body.nil? %>
-  <% end %>
-
-  <%= will_paginate @recent_jobs %>
-
-<% end %>
+</div>

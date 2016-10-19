@@ -1,20 +1,21 @@
-<h1><%= @company.name %></h1><br>
+<div class="module">
+  <h1><%= @company.name %></h1><br>
 
-<ul>
-  <% (@company.body.keys-['timeZone', 'utcOffset', 'geo']).each do |key, value| %>
-    <li><strong><%= key %></strong>: <%= @company.body[key] %></li>
+  <ul>
+    <% (@company.body.keys-['timeZone', 'utcOffset', 'geo']).each do |key, value| %>
+      <li><strong><%= key %></strong>: <%= @company.body[key] %></li>
+    <% end %>
+  </ul>
+
+  <h3>Job Listings</h3>
+
+  <% @company.jobs.each do |job| %>
+    <%= render job %>
   <% end %>
-</ul>
+  <br>
+  <h3>People</h3>
 
-<h3>Job Listings</h3>
-
-<% @company.jobs.each do |job| %>
-  <%= render job %>
-<% end %>
-
-<h3>People</h3>
-
-<% @company.people.each do |person| %>
-  <%= render person %>
-<% end %>
-
+  <% @company.people.each do |person| %>
+    <%= render person %>
+  <% end %>
+</div>

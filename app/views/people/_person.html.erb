@@ -1,6 +1,9 @@
-<strong><%= person.company.name %></strong><br>
-<ul>
-  <% (person.body.keys-["id"]).each do |k| %>
-    <li><%= k %>: <%= person.body[k] %>
-  <% end %>
-</ul>
+<div class="module">
+  <strong><%= person.body['name']['fullName'] %></strong><br>
+  <%= person.company.name %><br>
+  <ul>
+    <% (person.body.keys-["id"]).each do |k| %>
+      <li><%= k %>: <%= person.body[k] %>
+    <% end %>
+  </ul>
+</div>
