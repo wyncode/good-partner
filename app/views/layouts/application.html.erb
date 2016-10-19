@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <%= (button_to 'Dashboard', dashboard_path, method: :get) unless action_name == 'dashboard' %>
+    <%= render 'nav/navbar' %>
     <%= yield %>
   </body>
 </html>

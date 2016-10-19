@@ -1,0 +1,24 @@
+nav {
+  background-color: #808080;
+  width: 95%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+
+  ul {
+    list-style: none;
+    margin-top: 0px;
+    padding-bottom: 5px;
+    text-align: center;
+    padding-left: 0px;
+
+    li {
+      margin-left: auto;
+      margin-right: auto;
+      display: inline;
+
+      .btn {
+        padding: 5px 20px;
+      }
+    }
+  }
+}
