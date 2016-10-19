@@ -1,21 +1,21 @@
 <div class="module">
-  <h1><%= @company.name %></h1><br>
+  <h1><%= company.name %></h1><br>
 
   <ul>
-    <% (@company.body.keys-['timeZone', 'utcOffset', 'geo']).each do |key, value| %>
-      <li><strong><%= key %></strong>: <%= @company.body[key] %></li>
-    <% end %>
+    <% (company.body.keys-['timeZone', 'utcOffset', 'geo']).each do |key, value| %>
+      <li><strong><%= key %></strong>: <%= company.body[key] %></li>
+    <% end unless company.body.nil? %>
   </ul>
 
   <h3>Job Listings</h3>
 
-  <% @company.jobs.each do |job| %>
+  <% company.jobs.each do |job| %>
     <%= render job %>
   <% end %>
   <br>
   <h3>People</h3>
 
-  <% @company.people.each do |person| %>
+  <% company.people.each do |person| %>
     <%= render person %>
   <% end %>
 </div>

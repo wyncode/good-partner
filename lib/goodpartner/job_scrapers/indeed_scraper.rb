@@ -42,11 +42,10 @@ class IndeedScraper < GoodPartner::Scraper
       end
     end
 
-    if page.has_css?('.np')
+    unless find_all('.np').reject { |n| n.text == "« Previous" }.empty?
       find_all('.np').last.click
       visit_each_job
     end
-
   end
 
   def save_job_info
@@ -54,14 +53,14 @@ class IndeedScraper < GoodPartner::Scraper
     company_name = find('.company').text if page.has_css?('.company')
     description = find('.summary').text
 
-    Job.find_or_create_by(description: description) do |j|
-      Company.find_or_create_by(name: company_name) do |c|
-        c.name = company_name
-        j.company = c
+    if c = Company.find_by("name ilike '#{company_name}'")
+      j = Job.find_or_create_by(description: description, title: title) do |job|
+        c.jobs << job
       end
-
-      j.description = description
-      j.title = title
+      c.jobs << j if j
+    else
+      co = Company.create(name: company_name)
+      co.jobs << Job.create(description: description, title: title)
     end
   end
 

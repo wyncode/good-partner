@@ -7,16 +7,32 @@
   </ul>
 </div>
 
-<%= form_tag 'dashboard', method: :get do %>
-  <h3><%= label_tag 'Show Jobs from Companies with:' %></h3>
-  <%= label_tag 'information' %>
-  <%= check_box_tag :with_info %>
-  <%= label_tag 'without information' %>
-  <%= check_box_tag :without_info %>
-  <%= label_tag 'all' %>
-  <%= check_box_tag :all %>
-  <%= submit_tag 'Search' %>
-<% end %>
+<ul class="form-list">
+  <li>
+    <div class="form">
+      <%= form_tag 'dashboard', method: :get do %>
+        <h3><%= label_tag 'Sort Companies by job count?' %></h3>
+        <%= check_box_tag :sort %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
+  </li>
+
+  <li>
+    <div class="form">
+      <%= form_tag 'dashboard', method: :get do %>
+        <h3><%= label_tag 'Show Jobs from Companies with:' %></h3>
+        <%= label_tag 'information' %>
+        <%= check_box_tag :with_info %>
+        <%= label_tag 'without information' %>
+        <%= check_box_tag :without_info %>
+        <%= label_tag 'all' %>
+        <%= check_box_tag :all %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
+  </li>
+</ul>
 
 <h4><%= Job.per_page %> per page</h4>
 <div class="module">
@@ -52,6 +68,14 @@
     <% end %>
 
     <%= will_paginate @recent_jobs %>
+
+  <% elsif params[:sort] %>
+
+    <h2>Listing Companies in order of Job Count</h2>
+
+    <% @featured_companies.each do |company| %>
+      <%= render company %>
+    <% end %>
 
   <% end %>
 </div>

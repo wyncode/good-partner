@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  belongs_to :company
+  belongs_to :company, counter_cache: true
 
   self.per_page = 10
 
