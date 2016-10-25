@@ -1,12 +1,8 @@
 module GoodPartner
   class PersonFinder
-
-    def self.call(company, opts)
-      new(company).find(opts)
-    end
-
-    def initialize(company)
+    def initialize(company, opts)
       @company = company
+      find(opts)
     end
 
     def find(opts)
