@@ -54,13 +54,13 @@ class IndeedScraper < GoodPartner::Scraper
     description = find('.summary').text
 
     if c = Company.find_by("name ilike '#{company_name}'")
-      j = Job.find_or_create_by(description: description, title: title) do |job|
+      j = Job.find_or_create_by(description: description, title: title, source: 'Indeed') do |job|
         c.jobs << job
       end
       c.jobs << j if j
     else
       co = Company.create(name: company_name)
-      co.jobs << Job.create(description: description, title: title)
+      co.jobs << Job.create(description: description, title: title, source: 'Indeed')
     end
   end
 
