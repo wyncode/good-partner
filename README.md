@@ -6,6 +6,12 @@ This tool will be used to aggregate job postings,
 companies, and contacts for potential Wyncode Hiring Partners
 
 ## PersonFinder
+
+```ruby
+c = Company.first
+GoodPartner::PersonFinder.new(c, opts)
+```
+
 `opts` **must** include a `domain` key
 that you can get from `company.body['url']`
 
@@ -15,6 +21,8 @@ _Suggested_ Optional params ->
                owner, president, product, public_relations, real_estate, recruiting, research, sales]
 
  - seniority: [executive, director, manager]
+ 
+ - limit: default is 5, max is 20
 
 ## CompanyFinder
 
