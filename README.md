@@ -12,8 +12,7 @@ c = Company.first
 GoodPartner::PersonFinder.new(c, opts)
 ```
 
-`opts` **must** include a `domain` key
-that you can get from `company.url` or `company.body['url']`
+`opts` **must** include a `domain` key, you can get the value from `company.url` or `company.body['url']`
 
 _Suggested_ Optional params ->
  - role:      [ceo, communications, consulting, customer_service, education, engineering, finance, founder,
