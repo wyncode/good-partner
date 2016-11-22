@@ -1,4 +1,5 @@
 module GoodPartner
+  # A class to interact with the Clearbit API
   class PersonFinder
     def initialize(company, opts)
       @company = company
@@ -12,9 +13,7 @@ module GoodPartner
     end
 
     def save(result)
-      result = {} if result.nil?
-
-      Person.create(company: @company, body: result)
+      Person.find_or_create_by(company: @company, body: result)
     end
   end
 end

@@ -13,7 +13,7 @@
       <%= form_tag 'dashboard', method: :get do %>
         <h3><%= label_tag 'Sort Companies by job count?' %></h3>
         <%= check_box_tag :sort %>
-        <%= submit_tag 'Search' %>
+        <%= submit_tag 'Sort' %>
       <% end %>
     </div>
   </li>
@@ -28,7 +28,7 @@
         <%= check_box_tag :without_info %>
         <%= label_tag 'all' %>
         <%= check_box_tag :all %>
-        <%= submit_tag 'Search' %>
+        <%= submit_tag 'Sort' %>
       <% end %>
     </div>
   </li>

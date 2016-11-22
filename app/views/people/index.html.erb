@@ -1,4 +1,17 @@
 <h1>Listing People</h1>
+
+<div class="person-search">
+  <%= form_tag '/people/search' do %>
+    Find (count)
+    <%= select_tag :limit, options_for_select((1..5).to_a, 1) %>
+    in (role)
+    <%= select_tag :role, options_from_collection_for_select(@roles, :to_s, :humanize) %>
+    at (company)
+    <%= select_tag :company, options_from_collection_for_select(@companies, :id, :name) %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+</div>
+
 <div class="module">
   <ul>
     <% @people.each do |person| %>

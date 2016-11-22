@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :jobs, only: [:show, :index]
 
   resources :companies, only: [:show, :index]
+
+  post '/people/search' => 'people#search'
   resources :people, only: [:show, :index]
 
   get "login", to: "session#login"
